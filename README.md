@@ -1,5 +1,5 @@
 # Debugger for .NET
-This plug-in provides netcoredbg which implements VSCode Debug Adapter protocol and allows to debug .NET apps under .NET Core runtime.
+This plug-in provides [netcoredbg](https://github.com/Samsung/netcoredbg) which implements VSCode Debug Adapter protocol and allows to debug .NET apps under .NET Core runtime.
 
 # Launch configuration
 The base launch configuration looks like:
