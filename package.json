@@ -1,0 +1,120 @@
+{
+      "name": "netcoredbg-theia-plugin",
+      "publisher": "theia",
+      "keywords": [
+        "theia-plugin"
+      ],
+      "version": "0.0.1",
+      "license": "EPL-2.0",
+      
+      "files": [
+        "src"
+      ],
+      "devDependencies": {
+        "@theia/plugin": "latest",
+        "lerna": "^3.8.1",
+        "@theia/plugin-packager": "latest",
+        "rimraf": "2.6.2",
+        "typescript-formatter": "7.2.2",
+        "typescript": "2.9.2"
+      },
+      "scripts": {
+        "prepare": "yarn run clean && yarn run build",
+        "postinstall": "node ./scripts/download-netcoredbg.js",
+        "clean": "rimraf lib",
+        "format-code": "tsfmt -r",
+        "watch": "tsc -watch",
+        "compile": "tsc", 
+        "build": "yarn run format-code && yarn run compile && theia-plugin pack"
+      },
+      "engines": {
+        "theiaPlugin": "latest",
+        "cheRuntimeContainer": "eclipse/che-remote-plugin-dotnet-2.2.105:next"
+      },
+      "theiaPlugin": {
+            "backend": "lib/netcoredbg-theia-plugin-backend.js"
+      },
+      "contributes": {
+        "breakpoints": [{ "language": "CSharp" }],
+        "debuggers": [
+          {
+            "type": "netcoredbg",
+            "label": ".NET Debugger",
+    
+            "program": "./debug/netcoredbg/netcoredbg",
+            "args": ["--interpreter=vscode"],
+            "runtime": "",
+                
+            "configurationAttributes": {
+              "launch": {
+                "required": ["program"],
+                "properties": {
+                  "program": {
+                    "type": "string",
+                    "description": "Path to the application dll.\nThis property normally takes the form: '${workspaceFolder}/bin/Debug/(target-framework)/(project-name.dll)'\nExample: '${workspaceFolder}/bin/Debug/netcoreapp2.2/MyProject.dll'\n\nWhere:\n(target-framework) is the framework that the debugged project is being built for. This is normally found in the project file as the 'TargetFramework' property.\n(project-name.dll) is the name of debugged project's build output dll. This is normally the same as the project file name but with a '.dll' extension.",
+                    "default": "${workspaceFolder}/bin/Debug/<insert-target-framework-here>/<insert-project-name-here>.dll"
+                  },
+                  "stopAtEntry": {
+                    "type": "boolean",
+                    "description": "Automatically stop after launch.",
+                    "default": false
+                  },
+                  "console" : {
+                    "type": "string",
+                    "enum": [
+                      "internalConsole"
+                    ],
+                    "enumDescriptions": [
+                      "Output to the Debug Console. This doesn't support reading console input (ex:Console.ReadLine)"
+                    ],
+                    "description": "Where to launch the debug target.",
+                    "default": "internalConsole"
+                  },
+                  "args": {
+                    "anyOf": [
+                      {
+                        "type": "array",
+                        "description": "Command line arguments passed to the program.",
+                        "items": {
+                          "type": "string"
+                        },
+                        "default": []
+                      },
+                      {
+                        "type": "string",
+                        "description": "Stringified version of command line arguments passed to the program.",
+                        "default": ""
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "configurationSnippets": [
+              {
+                "label": ".NET: Launch .NET Core Console App",
+                "description": "Launch a .NET Core Console App with a debugger.",
+                "body": {
+                  "type": "netcoredbg",
+                  "request": "launch",
+                  "program": "^\"\\${workspaceFolder}/bin/Debug/${1:<target-framework>}/${2:<project-name.dll>}\"",
+                  "args": [],
+                  "name": ".NET Core Launch (console)",
+                  "stopAtEntry": false,
+                  "console": "internalConsole"
+                }
+              },
+              {
+                "label": ".NET: Attach to local .NET Core Console App",
+                "description": "Attach a debugger to a .NET Core Console App.",
+                "body": {
+                  "name": ".NET Core Attach",
+                  "type": "netcoredbg",
+                  "request": "attach",
+                  "processId": "^\"\\process id\""
+                }
+              }
+            ]          }
+        ]
+      }
+}

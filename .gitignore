@@ -1,0 +1,4 @@
+dist/
+debug/
+node_modules/
+*.theia
