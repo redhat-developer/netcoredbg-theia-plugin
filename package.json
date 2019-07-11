@@ -34,6 +34,9 @@
       "theiaPlugin": {
             "backend": "lib/netcoredbg-theia-plugin-backend.js"
       },
+      "activationEvents": [
+        "*"
+      ],
       "contributes": {
         "breakpoints": [{ "language": "CSharp" }],
         "debuggers": [
