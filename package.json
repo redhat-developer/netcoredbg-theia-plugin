@@ -1,6 +1,14 @@
 {
       "name": "netcoredbg-theia-plugin",
       "publisher": "theia",
+      "icon": "redhat-developer-icon.png",
+      "repository" : {
+        "type": "git",
+        "url": "https://github.com/redhat-developer/netcoredbg-theia-plugin"
+      },
+      "categories": [
+        "Debuggers"
+      ],
       "keywords": [
         "theia-plugin"
       ],
