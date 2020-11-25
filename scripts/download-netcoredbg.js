@@ -21,7 +21,7 @@ const mkdirp = require('mkdirp');
 
 // @ts-ignore
 const packagePath = path.join(__dirname, '..');
-let downloadUrl = 'https://github.com/Samsung/netcoredbg/releases/download/latest/netcoredbg-linux-master.tar.gz';
+let downloadUrl = 'https://github.com/Samsung/netcoredbg/releases/download/1.2.0-635/netcoredbg-linux-focal.tar.gz';
 const downloadDir = 'debug';
 const filename = 'netcoredbg-linux-master.tar.gz';
 const downloadPath = path.join(packagePath, downloadDir);
@@ -55,7 +55,7 @@ function downloadNetCoreDBG() {
                     response.pipe(file);
                 } else {
                     file.destroy();
-                    reject(new Error(`Failed to download omnisharp-roslyn with code: ${statusCode}`));
+                    reject(new Error(`Failed to download netcoredbg with code: ${statusCode}`));
                 }
             })
 
