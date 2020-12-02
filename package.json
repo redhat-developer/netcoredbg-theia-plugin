@@ -1,6 +1,6 @@
 {
       "name": "netcoredbg-theia-plugin",
-      "publisher": "theia",
+      "publisher": "redhat-developer",
       "icon": "redhat-developer-icon.png",
       "repository" : {
         "type": "git",
@@ -12,7 +12,7 @@
       "keywords": [
         "theia-plugin"
       ],
-      "version": "0.0.1",
+      "version": "0.0.5",
       "license": "EPL-2.0",
       
       "files": [
