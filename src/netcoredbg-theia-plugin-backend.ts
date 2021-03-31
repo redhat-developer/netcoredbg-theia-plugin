@@ -20,7 +20,6 @@ import * as cp from 'child_process';
 export function start(context: theia.PluginContext) {
 
     const outputChannel: theia.OutputChannel = theia.window.createOutputChannel('dotnet-log');
-    outputChannel.show();
 
     context.subscriptions.push(theia.commands.registerCommand(createBuildCommand(), (...args: any[]) => {
         buildProject(outputChannel);
